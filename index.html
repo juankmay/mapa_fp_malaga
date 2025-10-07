@@ -544,8 +544,8 @@
                     `).join('');
                     
                     const content = `
-                        <div style="min-width: 320px; max-width: 380px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                            <div style="background: linear-gradient(135deg, #009245 0%, #8BC53F 100%); padding: 20px; margin: -20px -20px 15px -20px; border-radius: 12px 12px 0 0;">
+                        <div style="min-width: 380px; max-width: 420px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                            <div style="background: linear-gradient(135deg, #009245 0%, #8BC53F 100%); padding: 20px; margin: -20px -20px 0 -20px; border-radius: 12px 12px 0 0;">
                                 <h3 style="margin: 0; color: #FFFFFF; font-size: 18px; font-weight: 700; line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">${centro.centro}</h3>
                                 <div style="margin-top: 8px; display: flex; align-items: center; gap: 6px; color: #FFFFFF; font-size: 14px; opacity: 0.95;">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -554,12 +554,21 @@
                                     ${centro.localidad}
                                 </div>
                             </div>
-                            <div style="padding: 0 5px;">
+                            
+                            <!-- Street View -->
+                            <div style="width: 100%; height: 200px; background: #e0e0e0; position: relative; overflow: hidden;">
+                                <div id="streetview-${centro.lat}-${centro.lng}" style="width: 100%; height: 100%;"></div>
+                                <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,146,69,0.9); color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600;">
+                                    📷 Street View
+                                </div>
+                            </div>
+                            
+                            <div style="padding: 15px 5px;">
                                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 10px; background: #f0f4f0; border-radius: 8px;">
                                     <span style="color: #009245; font-weight: 700; font-size: 15px;">Ciclos formativos</span>
                                     <span style="background: #009245; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700;">${centro.ciclos.length}</span>
                                 </div>
-                                <div style="max-height: 320px; overflow-y: auto; padding-right: 5px;">
+                                <div style="max-height: 280px; overflow-y: auto; padding-right: 5px;">
                                     ${ciclosHTML}
                                 </div>
                             </div>
@@ -568,6 +577,24 @@
                     
                     infoWindow.setContent(content);
                     infoWindow.open(map, marker);
+                    
+                    // Inicializar Street View después de que el InfoWindow se abra
+                    google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+                        const streetViewDiv = document.getElementById(`streetview-${centro.lat}-${centro.lng}`);
+                        if (streetViewDiv) {
+                            new google.maps.StreetViewPanorama(streetViewDiv, {
+                                position: { lat: centro.lat, lng: centro.lng },
+                                pov: { heading: 165, pitch: 0 },
+                                zoom: 1,
+                                addressControl: false,
+                                fullscreenControl: false,
+                                motionTracking: false,
+                                motionTrackingControl: false,
+                                enableCloseButton: false,
+                                showRoadLabels: false
+                            });
+                        }
+                    });
                 });
                 
                 markers.push(marker);
