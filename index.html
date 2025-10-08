@@ -348,9 +348,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Cargar los datos desde archivo externo -->
-    <script src="datos.js"></script>
     
     <script>
         let map;
@@ -360,56 +357,108 @@
         
         const familyColors = {
             'Informática y Comunicaciones': '#3498db',
-            'Administración y Gestión': '#e74c3c',
+            'Administración y gestión': '#e74c3c',
             'Sanidad': '#2ecc71',
-            'Comercio y Marketing': '#f39c12',
-            'Servicios Socioculturales y a la Comunidad': '#9b59b6',
-            'Hostelería y Turismo': '#1abc9c',
-            'Electricidad y Electrónica': '#e67e22',
+            'Comercio y marketing': '#f39c12',
+            'Servicios socioculturales y a la comunidad': '#9b59b6',
+            'Hostelería y turismo': '#1abc9c',
+            'Electricidad y electrónica': '#e67e22',
             'Transporte y Mantenimiento de Vehículos': '#34495e',
-            'Imagen Personal': '#e91e63',
+            'Imagen personal': '#e91e63',
             'Edificación y obra civil': '#795548',
-            'Fabricación Mecánica': '#607d8b',
+            'Fabricación mecánica': '#607d8b',
             'Instalación y Mantenimiento': '#ff5722',
-            'Artes Gráficas': '#673ab7',
-            'Imagen y Sonido': '#00bcd4',
-            'Actividades Físicas y Deportivas': '#4caf50',
+            'Artes gráficas': '#673ab7',
+            'Imagen y sonido': '#00bcd4',
+            'Actividades físicas y deportivas': '#4caf50',
             'Agraria': '#8bc34a',
             'Química': '#cddc39',
-            'Seguridad y Medio Ambiente': '#ffc107',
+            'Seguridad y medio ambiente': '#ffc107',
             'Energía y Agua': '#ff9800',
             'Textil, Confección y Piel': '#9c27b0',
-            'Madera, Mueble y Corcho': '#795548',
-            'Industrias Alimentarias': '#f44336',
+            'Madera, mueble y corcho': '#795548',
+            'Industrias alimentarias': '#f44336',
             'Marítimo - Pesquera': '#2196f3',
-            'Artes y Artesanías': '#ff6f00'
+            'Artes y Artesanías': '#ff6f00',
+            'Fabricación Mecánica e Instalación y Mantenimiento': '#455a64',
+            'Vidrio y cerámica': '#00897b'
         };
+
+        async function loadData() {
+            try {
+                const response = await window.fs.readFile('oferta_fp_geolocalizada_utf8.csv', { encoding: 'utf8' });
+                
+                const lines = response.split('\n');
+                const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+                
+                allData = [];
+                for (let i = 1; i < lines.length; i++) {
+                    if (lines[i].trim() === '') continue;
+                    
+                    const values = parseCSVLine(lines[i]);
+                    if (values.length === headers.length) {
+                        const obj = {};
+                        headers.forEach((header, index) => {
+                            obj[header] = values[index];
+                        });
+                        if (obj.latitud && obj.longitud) {
+                            allData.push(obj);
+                        }
+                    }
+                }
+                
+                console.log('Datos cargados:', allData.length, 'centros');
+                return allData;
+            } catch (error) {
+                console.error('Error cargando datos:', error);
+                return [];
+            }
+        }
+
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim().replace(/^"(.*)"$/, '$1'));
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim().replace(/^"(.*)"$/, '$1'));
+            
+            return result;
+        }
 
         async function initMap() {
             try {
-                // Esperar a que Google Maps esté disponible
                 while (!window.google || !window.google.maps) {
                     await new Promise(resolve => setTimeout(resolve, 100));
                 }
                 
-                // Importar las librerías necesarias
                 const { Map } = await google.maps.importLibrary("maps");
                 const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
                 
-                // Crear el mapa con mapId (requerido para AdvancedMarkerElement)
                 map = new Map(document.getElementById("map"), {
                     zoom: 9,
                     center: { lat: 36.7213, lng: -4.4214 },
-                    mapId: 'DEMO_MAP_ID', // Puedes usar este ID de demo o crear uno propio
+                    mapId: 'DEMO_MAP_ID',
                     mapTypeControl: true,
-                    streetViewControl: true,
+                    streetViewControl: false,
                     fullscreenControl: true,
                     zoomControl: true
                 });
                 
                 infoWindow = new google.maps.InfoWindow();
                 
-                loadData();
+                await loadData();
                 populateFilters();
                 createLegend();
                 displayMarkers(allData);
@@ -419,20 +468,10 @@
             }
         }
 
-        function loadData() {
-            // Los datos vienen del archivo datos.js como variable CENTROS_DATA
-            if (typeof CENTROS_DATA !== 'undefined') {
-                allData = CENTROS_DATA.filter(d => d.latitud && d.longitud);
-                console.log('Datos cargados:', allData.length, 'registros');
-            } else {
-                console.error('No se encontró CENTROS_DATA. Asegúrate de que el archivo datos.js esté cargado.');
-            }
-        }
-
         function populateFilters() {
             const familias = [...new Set(allData.map(d => d['Familia Profesional']))].filter(Boolean).sort();
-            const ensenanzas = [...new Set(allData.map(d => d.ENSEÑANZA))].filter(Boolean).sort();
-            const localidades = [...new Set(allData.map(d => d.LOCALIDAD))].filter(Boolean).sort();
+            const ensenanzas = [...new Set(allData.map(d => d['ENSEÑANZA']))].filter(Boolean).sort();
+            const localidades = [...new Set(allData.map(d => d['LOCALIDAD']))].filter(Boolean).sort();
             
             const familiaSelect = document.getElementById('familiaFilter');
             familias.forEach(f => {
@@ -484,35 +523,36 @@
             markers.forEach(marker => marker.map = null);
             markers = [];
             
-            // Importar las librerías de marcadores
             const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
             
             const groupedByCentro = {};
             data.forEach(item => {
-                const key = `${item.Centro}_${item.latitud}_${item.longitud}`;
+                const key = `${item['Centro']}_${item['latitud']}_${item['longitud']}`;
                 if (!groupedByCentro[key]) {
                     groupedByCentro[key] = {
-                        centro: item.Centro,
-                        localidad: item.LOCALIDAD,
-                        lat: item.latitud,
-                        lng: item.longitud,
+                        centro: item['Centro'],
+                        localidad: item['LOCALIDAD'],
+                        codigo: item['Código'],
+                        lat: parseFloat(item['latitud']),
+                        lng: parseFloat(item['longitud']),
                         ciclos: []
                     };
                 }
                 groupedByCentro[key].ciclos.push({
                     ciclo: item['Ciclo Formativo'],
                     familia: item['Familia Profesional'],
-                    ensenanza: item.ENSEÑANZA
+                    ensenanza: item['ENSEÑANZA']
                 });
             });
             
             const bounds = new google.maps.LatLngBounds();
             
             Object.values(groupedByCentro).forEach(centro => {
+                if (isNaN(centro.lat) || isNaN(centro.lng)) return;
+                
                 const familiasPrincipales = [...new Set(centro.ciclos.map(c => c.familia))];
                 const color = familyColors[familiasPrincipales[0]] || '#95a5a6';
                 
-                // Crear un pin personalizado con el color de la familia profesional
                 const pinElement = new PinElement({
                     background: color,
                     borderColor: '#ffffff',
@@ -528,6 +568,8 @@
                 });
                 
                 marker.addListener('click', () => {
+                    const familias = [...new Set(centro.ciclos.map(c => c.familia))];
+                    
                     const ciclosHTML = centro.ciclos.map(c => `
                         <div style="margin: 10px 0; padding: 12px; background: linear-gradient(135deg, #f8fdf9 0%, #ffffff 100%); border-radius: 8px; border-left: 4px solid ${familyColors[c.familia] || '#95a5a6'}; transition: transform 0.2s;">
                             <div style="font-weight: 600; color: #009245; font-size: 14px; margin-bottom: 6px; line-height: 1.4;">${c.ciclo}</div>
@@ -544,7 +586,7 @@
                     `).join('');
                     
                     const content = `
-                        <div style="min-width: 320px; max-width: 380px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                        <div style="min-width: 320px; max-width: 400px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                             <div style="background: linear-gradient(135deg, #009245 0%, #8BC53F 100%); padding: 20px; margin: -20px -20px 15px -20px; border-radius: 12px 12px 0 0;">
                                 <h3 style="margin: 0; color: #FFFFFF; font-size: 18px; font-weight: 700; line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">${centro.centro}</h3>
                                 <div style="margin-top: 8px; display: flex; align-items: center; gap: 6px; color: #FFFFFF; font-size: 14px; opacity: 0.95;">
@@ -555,12 +597,26 @@
                                 </div>
                             </div>
                             <div style="padding: 0 5px;">
-                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 10px; background: #f0f4f0; border-radius: 8px;">
-                                    <span style="color: #009245; font-weight: 700; font-size: 15px;">Ciclos formativos</span>
-                                    <span style="background: #009245; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700;">${centro.ciclos.length}</span>
+                                <div style="margin-bottom: 15px;">
+                                    <div style="color: #009245; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 2px solid #8BC53F;">Información del Centro</div>
+                                    <div style="font-size: 13px; color: #666; line-height: 1.6;">
+                                        <strong style="color: #333;">Código:</strong> ${centro.codigo}
+                                    </div>
                                 </div>
-                                <div style="max-height: 320px; overflow-y: auto; padding-right: 5px;">
-                                    ${ciclosHTML}
+                                <div style="margin-bottom: 15px;">
+                                    <div style="color: #009245; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 2px solid #8BC53F;">Familias Profesionales (${familias.length})</div>
+                                    <div>
+                                        ${familias.map(f => `<span style="display: inline-block; background: #f0f7f4; color: #007849; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; margin: 2px;">${f}</span>`).join('')}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 10px; background: #f0f4f0; border-radius: 8px;">
+                                        <span style="color: #009245; font-weight: 700; font-size: 15px;">Ciclos Formativos</span>
+                                        <span style="background: #009245; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700;">${centro.ciclos.length}</span>
+                                    </div>
+                                    <div style="max-height: 300px; overflow-y: auto; padding-right: 5px;">
+                                        ${ciclosHTML}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -585,7 +641,7 @@
         }
 
         function updateStats(data) {
-            const centros = new Set(data.map(d => `${d.Centro}_${d.latitud}_${d.longitud}`));
+            const centros = new Set(data.map(d => `${d['Centro']}_${d['latitud']}_${d['longitud']}`));
             document.getElementById('centrosCount').textContent = centros.size;
             document.getElementById('ciclosCount').textContent = data.length;
         }
@@ -601,10 +657,10 @@
                 filtered = filtered.filter(d => d['Familia Profesional'] === familia);
             }
             if (ensenanza) {
-                filtered = filtered.filter(d => d.ENSEÑANZA === ensenanza);
+                filtered = filtered.filter(d => d['ENSEÑANZA'] === ensenanza);
             }
             if (localidad) {
-                filtered = filtered.filter(d => d.LOCALIDAD === localidad);
+                filtered = filtered.filter(d => d['LOCALIDAD'] === localidad);
             }
             
             displayMarkers(filtered);
@@ -617,7 +673,6 @@
             displayMarkers(allData);
         }
         
-        // Inicializar cuando la página esté lista
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initMap);
         } else {
@@ -625,13 +680,11 @@
         }
     </script>
     
-    <!-- Cargar Google Maps API de forma asíncrona -->
     <script>
         (function(d, s, id) {
             var js, gjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            // Importante: Incluir el parámetro v=beta para usar AdvancedMarkerElement
             js.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyANqujWU86Yfi_1vfhTKxc1hr3s6Hce0tA&v=beta&loading=async';
             gjs.parentNode.insertBefore(js, gjs);
         }(document, 'script', 'google-maps-api'));
