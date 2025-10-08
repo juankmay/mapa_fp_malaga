@@ -134,6 +134,7 @@
         .btn-reset {
             background: #8BC53F;
             color: white;
+            width: 100%;
         }
         
         .btn-reset:hover {
@@ -322,7 +323,6 @@
                 </div>
                 
                 <div class="button-group">
-                    <button class="btn-apply" onclick="applyFilters()">🔍 Aplicar Filtros</button>
                     <button class="btn-reset" onclick="resetFilters()">🔄 Limpiar Filtros</button>
                 </div>
             </div>
@@ -496,6 +496,11 @@
                 option.textContent = l;
                 localidadSelect.appendChild(option);
             });
+            
+            // Añadir event listeners para aplicar filtros automáticamente
+            familiaSelect.addEventListener('change', applyFilters);
+            ensenanzaSelect.addEventListener('change', applyFilters);
+            localidadSelect.addEventListener('change', applyFilters);
         }
 
         function createLegend() {
