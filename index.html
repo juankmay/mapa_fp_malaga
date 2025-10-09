@@ -307,12 +307,32 @@
                     map, position: { lat: centro.latitud, lng: centro.longitud }, title: centro.Centro, content: pin.element
                 });
                 marker.addListener('click', () => {
-                    infoWindow.setContent(`<strong>${centro.Centro}</strong><br>${centro.LOCALIDAD}<br>${centro.ciclos.length} ciclos`);
+                    const ciclosHTML = centro.ciclos.map(c => `
+                        <div style="padding: 8px; margin: 5px 0; background: #f9f9f9; border-radius: 6px; border-left: 4px solid ${familyColors[c.familia] || '#95a5a6'};">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 3px;">${c.ciclo}</div>
+                            <div style="font-size: 12px; color: #666;">📚 ${c.familia}</div>
+                            <div style="font-size: 12px; color: #666;">🎓 ${c.ensenanza}</div>
+                        </div>
+                    `).join('');
+                    
+                    infoWindow.setContent(`
+                        <div style="max-width: 350px; font-family: 'Segoe UI', sans-serif;">
+                            <h3 style="color: #009245; margin: 0 0 10px 0; font-size: 18px; border-bottom: 3px solid #8BC53F; padding-bottom: 8px;">
+                                ${centro.Centro}
+                            </h3>
+                            <div style="color: #555; margin-bottom: 12px; font-size: 14px;">
+                                📍 <strong>${centro.LOCALIDAD}</strong>
+                            </div>
+                            <div style="background: linear-gradient(135deg, #009245, #8BC53F); color: white; padding: 8px 12px; border-radius: 6px; margin-bottom: 12px; text-align: center; font-weight: 600;">
+                                ${centro.ciclos.length} Ciclo${centro.ciclos.length !== 1 ? 's' : ''} Formativo${centro.ciclos.length !== 1 ? 's' : ''}
+                            </div>
+                            <div style="max-height: 300px; overflow-y: auto;">
+                                ${ciclosHTML}
+                            </div>
+                        </div>
+                    `);
                     infoWindow.open(map, marker);
                 });
-                markers.push(marker);
-                bounds.extend(marker.position);
-            });
 
             if (markers.length) map.fitBounds(bounds);
             updateStats(data);
@@ -348,3 +368,4 @@
     </script>
 </body>
 </html>
+
