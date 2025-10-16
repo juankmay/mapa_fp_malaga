@@ -5,34 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mapa de Centros de FP - Málaga</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f0f4f0;
         }
-        
         .header-banner {
             background: linear-gradient(135deg, #009245 0%, #8BC53F 100%);
             padding: 30px 20px;
             margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0,146,69,0.2);
         }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header-content { max-width: 1400px; margin: 0 auto; }
         h1 {
             color: #FFFFFF;
             margin-bottom: 8px;
@@ -40,18 +25,8 @@
             font-weight: 700;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        
-        .subtitle {
-            color: #FFFFFF;
-            margin-bottom: 0;
-            font-size: 16px;
-            opacity: 0.95;
-        }
-        
-        .container-content {
-            padding: 0 20px 20px 20px;
-        }
-        
+        .subtitle { color: #FFFFFF; font-size: 16px; opacity: 0.95; }
+        .container-content { padding: 0 20px 20px 20px; }
         .filters {
             background: white;
             padding: 25px;
@@ -60,19 +35,13 @@
             margin-bottom: 20px;
             border-top: 4px solid #009245;
         }
-        
         .filter-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 20px;
         }
-        
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-        }
-        
+        .filter-group { display: flex; flex-direction: column; }
         label {
             font-weight: 600;
             margin-bottom: 8px;
@@ -81,34 +50,22 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
-        select {
+        select, input[type="text"] {
             padding: 12px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 14px;
             background: white;
-            cursor: pointer;
-            transition: all 0.3s;
             color: #58595B;
+            transition: all 0.3s;
         }
-        
-        select:hover {
-            border-color: #8BC53F;
-        }
-        
-        select:focus {
+        select:hover, input[type="text"]:hover { border-color: #8BC53F; }
+        select:focus, input[type="text"]:focus {
             outline: none;
             border-color: #009245;
             box-shadow: 0 0 0 3px rgba(0, 146, 69, 0.1);
         }
-        
-        .button-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        
+        .button-group { display: flex; gap: 12px; margin-top: 20px; }
         button {
             padding: 12px 24px;
             border: none;
@@ -118,30 +75,25 @@
             transition: all 0.3s;
             font-weight: 600;
         }
-        
         .btn-apply {
             background: #009245;
             color: white;
             flex: 1;
         }
-        
         .btn-apply:hover {
             background: #007a38;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 146, 69, 0.3);
         }
-        
         .btn-reset {
             background: #8BC53F;
             color: white;
         }
-        
         .btn-reset:hover {
             background: #7ab535;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(139, 197, 63, 0.3);
         }
-        
         .map-container {
             background: white;
             border-radius: 12px;
@@ -150,12 +102,7 @@
             height: 600px;
             border: 1px solid #e0e0e0;
         }
-        
-        #map {
-            width: 100%;
-            height: 100%;
-        }
-        
+        #map { width: 100%; height: 100%; }
         .stats {
             background: linear-gradient(135deg, #009245 0%, #8BC53F 100%);
             padding: 20px 25px;
@@ -168,7 +115,6 @@
             flex-wrap: wrap;
             gap: 20px;
         }
-        
         .stat-item {
             display: flex;
             flex-direction: column;
@@ -179,7 +125,6 @@
             border-radius: 8px;
             backdrop-filter: blur(10px);
         }
-        
         .stat-label {
             color: #FFFFFF;
             font-size: 13px;
@@ -187,14 +132,12 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
         .stat-value {
             color: #FFFFFF;
             font-weight: 700;
             font-size: 32px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        
         .legend {
             background: white;
             padding: 25px;
@@ -203,7 +146,6 @@
             box-shadow: 0 2px 8px rgba(0,146,69,0.1);
             border-top: 4px solid #009245;
         }
-        
         .legend h3 {
             font-size: 18px;
             margin-bottom: 15px;
@@ -212,13 +154,11 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
         .legend-items {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 10px;
         }
-        
         .legend-item {
             display: flex;
             align-items: center;
@@ -229,11 +169,7 @@
             transition: background 0.2s;
             color: #58595B;
         }
-        
-        .legend-item:hover {
-            background: #f0f4f0;
-        }
-        
+        .legend-item:hover { background: #f0f4f0; }
         .legend-color {
             width: 24px;
             height: 24px;
@@ -241,49 +177,6 @@
             border: 3px solid white;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
             flex-shrink: 0;
-        }
-        
-        @media (max-width: 768px) {
-            .header-banner {
-                padding: 20px;
-            }
-            
-            .container-content {
-                padding: 0 10px 10px 10px;
-            }
-            
-            h1 {
-                font-size: 24px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            .filter-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .map-container {
-                height: 450px;
-            }
-            
-            .stats {
-                flex-direction: column;
-                padding: 15px;
-            }
-            
-            .stat-item {
-                width: 100%;
-            }
-            
-            .button-group {
-                flex-direction: column;
-            }
-            
-            .btn-apply {
-                width: 100%;
-            }
         }
     </style>
 </head>
@@ -298,26 +191,25 @@
     <div class="container">
         <div class="container-content">
             <div class="filters">
+                <!-- 🔍 Nuevo campo de búsqueda -->
+                <div class="filter-group" style="margin-bottom: 20px;">
+                    <label for="busquedaCentro">🔎 Buscar centro</label>
+                    <input type="text" id="busquedaCentro" placeholder="Escribe el nombre del centro..." list="sugerenciasCentros" autocomplete="off">
+                    <datalist id="sugerenciasCentros"></datalist>
+                </div>
+
                 <div class="filter-row">
                     <div class="filter-group">
                         <label for="familiaFilter">Familia Profesional</label>
-                        <select id="familiaFilter">
-                            <option value="">Todas las familias</option>
-                        </select>
+                        <select id="familiaFilter"><option value="">Todas las familias</option></select>
                     </div>
-                    
                     <div class="filter-group">
                         <label for="ensenanzaFilter">Tipo de Enseñanza</label>
-                        <select id="ensenanzaFilter">
-                            <option value="">Todas las enseñanzas</option>
-                        </select>
+                        <select id="ensenanzaFilter"><option value="">Todas las enseñanzas</option></select>
                     </div>
-                    
                     <div class="filter-group">
                         <label for="localidadFilter">Localidad</label>
-                        <select id="localidadFilter">
-                            <option value="">Todas las localidades</option>
-                        </select>
+                        <select id="localidadFilter"><option value="">Todas las localidades</option></select>
                     </div>
                 </div>
                 
@@ -349,15 +241,11 @@
         </div>
     </div>
 
-    <!-- Cargar los datos desde archivo externo -->
+    <!-- Cargar datos -->
     <script src="datos.js"></script>
-    
+
     <script>
-        let map;
-        let markers = [];
-        let allData = [];
-        let infoWindow;
-        
+        let map, markers = [], allData = [], infoWindow;
         const familyColors = {
             'Informática y Comunicaciones': '#3498db',
             'Administración y Gestión': '#e74c3c',
@@ -385,47 +273,11 @@
             'Artes y Artesanías': '#ff6f00'
         };
 
-        async function initMap() {
-            try {
-                // Esperar a que Google Maps esté disponible
-                while (!window.google || !window.google.maps) {
-                    await new Promise(resolve => setTimeout(resolve, 100));
-                }
-                
-                // Importar las librerías necesarias
-                const { Map } = await google.maps.importLibrary("maps");
-                const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
-                
-                // Crear el mapa con mapId (requerido para AdvancedMarkerElement)
-                map = new Map(document.getElementById("map"), {
-                    zoom: 9,
-                    center: { lat: 36.7213, lng: -4.4214 },
-                    mapId: 'DEMO_MAP_ID', // Puedes usar este ID de demo o crear uno propio
-                    mapTypeControl: true,
-                    streetViewControl: true,
-                    fullscreenControl: true,
-                    zoomControl: true
-                });
-                
-                infoWindow = new google.maps.InfoWindow();
-                
-                loadData();
-                populateFilters();
-                createLegend();
-                displayMarkers(allData);
-            } catch (error) {
-                console.error('Error initializing map:', error);
-                document.getElementById('map').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#e74c3c;text-align:center;padding:20px;"><p>⚠️ Error al cargar el mapa.<br><small>' + error.message + '</small><br><br>Asegúrate de:<br>1. Tener una API Key válida<br>2. Haber activado "Maps JavaScript API" en Google Cloud Console</p></div>';
-            }
-        }
-
         function loadData() {
-            // Los datos vienen del archivo datos.js como variable CENTROS_DATA
             if (typeof CENTROS_DATA !== 'undefined') {
                 allData = CENTROS_DATA.filter(d => d.latitud && d.longitud);
-                console.log('Datos cargados:', allData.length, 'registros');
             } else {
-                console.error('No se encontró CENTROS_DATA. Asegúrate de que el archivo datos.js esté cargado.');
+                console.error('No se encontró CENTROS_DATA');
             }
         }
 
@@ -433,208 +285,109 @@
             const familias = [...new Set(allData.map(d => d['Familia Profesional']))].filter(Boolean).sort();
             const ensenanzas = [...new Set(allData.map(d => d.ENSEÑANZA))].filter(Boolean).sort();
             const localidades = [...new Set(allData.map(d => d.LOCALIDAD))].filter(Boolean).sort();
-            
+
             const familiaSelect = document.getElementById('familiaFilter');
-            familias.forEach(f => {
-                const option = document.createElement('option');
-                option.value = f;
-                option.textContent = f;
-                familiaSelect.appendChild(option);
-            });
-            
+            familias.forEach(f => familiaSelect.innerHTML += `<option>${f}</option>`);
+
             const ensenanzaSelect = document.getElementById('ensenanzaFilter');
-            ensenanzas.forEach(e => {
-                const option = document.createElement('option');
-                option.value = e;
-                option.textContent = e;
-                ensenanzaSelect.appendChild(option);
-            });
-            
+            ensenanzas.forEach(e => ensenanzaSelect.innerHTML += `<option>${e}</option>`);
+
             const localidadSelect = document.getElementById('localidadFilter');
-            localidades.forEach(l => {
-                const option = document.createElement('option');
-                option.value = l;
-                option.textContent = l;
-                localidadSelect.appendChild(option);
-            });
+            localidades.forEach(l => localidadSelect.innerHTML += `<option>${l}</option>`);
         }
 
-        function createLegend() {
-            const legendItems = document.getElementById('legendItems');
-            const familias = [...new Set(allData.map(d => d['Familia Profesional']))].filter(Boolean).sort();
-            
-            familias.forEach(familia => {
-                const item = document.createElement('div');
-                item.className = 'legend-item';
-                
-                const color = document.createElement('div');
-                color.className = 'legend-color';
-                color.style.backgroundColor = familyColors[familia] || '#95a5a6';
-                
-                const text = document.createElement('span');
-                text.textContent = familia;
-                
-                item.appendChild(color);
-                item.appendChild(text);
-                legendItems.appendChild(item);
-            });
+        function setupSearch() {
+            const input = document.getElementById('busquedaCentro');
+            const datalist = document.getElementById('sugerenciasCentros');
+            const centros = [...new Set(allData.map(d => d.Centro))].sort();
+            datalist.innerHTML = centros.map(c => `<option value="${c}"></option>`).join('');
+            input.addEventListener('input', applyFilters);
         }
 
         async function displayMarkers(data) {
-            markers.forEach(marker => marker.map = null);
+            markers.forEach(m => m.map = null);
             markers = [];
-            
-            // Importar las librerías de marcadores
             const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
-            
-            const groupedByCentro = {};
+            const grouped = {};
             data.forEach(item => {
                 const key = `${item.Centro}_${item.latitud}_${item.longitud}`;
-                if (!groupedByCentro[key]) {
-                    groupedByCentro[key] = {
-                        centro: item.Centro,
-                        localidad: item.LOCALIDAD,
-                        lat: item.latitud,
-                        lng: item.longitud,
-                        ciclos: []
-                    };
-                }
-                groupedByCentro[key].ciclos.push({
-                    ciclo: item['Ciclo Formativo'],
-                    familia: item['Familia Profesional'],
-                    ensenanza: item.ENSEÑANZA
-                });
+                if (!grouped[key]) grouped[key] = { centro: item.Centro, localidad: item.LOCALIDAD, lat: item.latitud, lng: item.longitud, ciclos: [] };
+                grouped[key].ciclos.push(item);
             });
-            
             const bounds = new google.maps.LatLngBounds();
-            
-            Object.values(groupedByCentro).forEach(centro => {
-                const familiasPrincipales = [...new Set(centro.ciclos.map(c => c.familia))];
-                const color = familyColors[familiasPrincipales[0]] || '#95a5a6';
-                
-                // Crear un pin personalizado con el color de la familia profesional
-                const pinElement = new PinElement({
-                    background: color,
-                    borderColor: '#ffffff',
-                    glyphColor: '#ffffff',
-                    scale: 1.2
-                });
-                
+            Object.values(grouped).forEach(c => {
+                const color = familyColors[c.ciclos[0]['Familia Profesional']] || '#95a5a6';
+                const pin = new PinElement({ background: color, borderColor: '#fff', scale: 1.2 });
                 const marker = new AdvancedMarkerElement({
-                    map: map,
-                    position: { lat: centro.lat, lng: centro.lng },
-                    title: centro.centro,
-                    content: pinElement.element
+                    map, position: { lat: c.lat, lng: c.lng }, title: c.centro, content: pin.element
                 });
-                
                 marker.addListener('click', () => {
-                    const ciclosHTML = centro.ciclos.map(c => `
-                        <div style="margin: 10px 0; padding: 12px; background: linear-gradient(135deg, #f8fdf9 0%, #ffffff 100%); border-radius: 8px; border-left: 4px solid ${familyColors[c.familia] || '#95a5a6'}; transition: transform 0.2s;">
-                            <div style="font-weight: 600; color: #009245; font-size: 14px; margin-bottom: 6px; line-height: 1.4;">${c.ciclo}</div>
-                            <div style="display: flex; flex-direction: column; gap: 4px;">
-                                <div style="display: flex; align-items: center; gap: 6px;">
-                                    <span style="background: #009245; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">📚 ${c.ensenanza}</span>
-                                </div>
-                                <div style="color: #58595B; font-size: 12px; display: flex; align-items: center; gap: 6px;">
-                                    <span style="color: ${familyColors[c.familia] || '#95a5a6'}; font-weight: 600;">●</span>
-                                    ${c.familia}
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
-                    
-                    const content = `
-                        <div style="min-width: 320px; max-width: 380px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                            <div style="background: linear-gradient(135deg, #009245 0%, #8BC53F 100%); padding: 20px; margin: -20px -20px 15px -20px; border-radius: 12px 12px 0 0;">
-                                <h3 style="margin: 0; color: #FFFFFF; font-size: 18px; font-weight: 700; line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">${centro.centro}</h3>
-                                <div style="margin-top: 8px; display: flex; align-items: center; gap: 6px; color: #FFFFFF; font-size: 14px; opacity: 0.95;">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                                    </svg>
-                                    ${centro.localidad}
-                                </div>
-                            </div>
-                            <div style="padding: 0 5px;">
-                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 10px; background: #f0f4f0; border-radius: 8px;">
-                                    <span style="color: #009245; font-weight: 700; font-size: 15px;">Ciclos formativos</span>
-                                    <span style="background: #009245; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700;">${centro.ciclos.length}</span>
-                                </div>
-                                <div style="max-height: 320px; overflow-y: auto; padding-right: 5px;">
-                                    ${ciclosHTML}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    infoWindow.setContent(content);
+                    infoWindow.setContent(`<div><strong>${c.centro}</strong><br>${c.localidad}</div>`);
                     infoWindow.open(map, marker);
                 });
-                
                 markers.push(marker);
-                bounds.extend({ lat: centro.lat, lng: centro.lng });
+                bounds.extend({ lat: c.lat, lng: c.lng });
             });
-            
-            if (markers.length > 0) {
-                map.fitBounds(bounds);
-                if (markers.length === 1) {
-                    map.setZoom(14);
-                }
-            }
-            
-            updateStats(data);
-        }
-
-        function updateStats(data) {
-            const centros = new Set(data.map(d => `${d.Centro}_${d.latitud}_${d.longitud}`));
-            document.getElementById('centrosCount').textContent = centros.size;
+            if (markers.length) map.fitBounds(bounds);
+            document.getElementById('centrosCount').textContent = Object.keys(grouped).length;
             document.getElementById('ciclosCount').textContent = data.length;
         }
 
         function applyFilters() {
-            const familia = document.getElementById('familiaFilter').value;
-            const ensenanza = document.getElementById('ensenanzaFilter').value;
-            const localidad = document.getElementById('localidadFilter').value;
-            
+            const f = document.getElementById('familiaFilter').value;
+            const e = document.getElementById('ensenanzaFilter').value;
+            const l = document.getElementById('localidadFilter').value;
+            const b = document.getElementById('busquedaCentro').value.toLowerCase().trim();
             let filtered = allData;
-            
-            if (familia) {
-                filtered = filtered.filter(d => d['Familia Profesional'] === familia);
-            }
-            if (ensenanza) {
-                filtered = filtered.filter(d => d.ENSEÑANZA === ensenanza);
-            }
-            if (localidad) {
-                filtered = filtered.filter(d => d.LOCALIDAD === localidad);
-            }
-            
+            if (f) filtered = filtered.filter(d => d['Familia Profesional'] === f);
+            if (e) filtered = filtered.filter(d => d.ENSEÑANZA === e);
+            if (l) filtered = filtered.filter(d => d.LOCALIDAD === l);
+            if (b) filtered = filtered.filter(d => d.Centro.toLowerCase().includes(b));
             displayMarkers(filtered);
         }
 
         function resetFilters() {
-            document.getElementById('familiaFilter').value = '';
-            document.getElementById('ensenanzaFilter').value = '';
-            document.getElementById('localidadFilter').value = '';
+            ['familiaFilter', 'ensenanzaFilter', 'localidadFilter', 'busquedaCentro'].forEach(id => document.getElementById(id).value = '');
             displayMarkers(allData);
         }
-        
-        // Inicializar cuando la página esté lista
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initMap);
-        } else {
-            initMap();
+
+        // ✅ Carga garantizada del mapa
+        let mapInitialized = false;
+        async function initMap() {
+            if (mapInitialized) return;
+            mapInitialized = true;
+            document.getElementById('map').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#009245;font-weight:600;">Cargando mapa...</div>';
+            const { Map } = await google.maps.importLibrary("maps");
+            map = new Map(document.getElementById("map"), {
+                zoom: 9, center: { lat: 36.7213, lng: -4.4214 }, mapId: 'DEMO_MAP_ID'
+            });
+            infoWindow = new google.maps.InfoWindow();
+            loadData(); populateFilters(); setupSearch(); displayMarkers(allData); addGeoButton(map);
+        }
+
+        function addGeoButton(map) {
+            const div = document.createElement('div');
+            const btn = document.createElement('button');
+            btn.textContent = '📍 Ir a mi ubicación';
+            Object.assign(btn.style, {
+                background: '#fff', border: '2px solid #009245', borderRadius: '8px',
+                margin: '10px', padding: '10px', cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,.3)'
+            });
+            div.appendChild(btn);
+            btn.addEventListener('click', () => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(pos => {
+                        const loc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+                        map.setCenter(loc); map.setZoom(13);
+                        new google.maps.Marker({ position: loc, map, title: 'Tu ubicación' });
+                    }, () => alert('No se pudo obtener la ubicación.'));
+                }
+            });
+            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(div);
         }
     </script>
-    
-    <!-- Cargar Google Maps API de forma asíncrona -->
-    <script>
-        (function(d, s, id) {
-            var js, gjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            // Importante: Incluir el parámetro v=beta para usar AdvancedMarkerElement
-            js.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyANqujWU86Yfi_1vfhTKxc1hr3s6Hce0tA&v=beta&loading=async';
-            gjs.parentNode.insertBefore(js, gjs);
-        }(document, 'script', 'google-maps-api'));
-    </script>
+
+    <!-- ✅ Carga del mapa con callback -->
+    <script async src="https://maps.googleapis.com/maps/api/js?key=&v=bAIzaSyANqujWU86Yfi_1vfhTKxc1hr3s6Hce0tAeta&callback=initMap"></script>
 </body>
 </html>
