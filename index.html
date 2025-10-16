@@ -11,8 +11,6 @@
             box-sizing: border-box;
         }
 
-        /* === ESTILOS PRINCIPALES (sin cambios) === */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f0f4f0;
@@ -35,8 +33,6 @@
             margin: 0 auto;
         }
 
-        .container { max-width: 1400px; margin: 0 auto; }
-        .header-content { max-width: 1400px; margin: 0 auto; }
         h1 {
             color: #FFFFFF;
             margin-bottom: 8px;
@@ -56,17 +52,13 @@
             padding: 0 20px 20px 20px;
         }
 
-        .subtitle { color: #FFFFFF; margin-bottom: 0; font-size: 16px; opacity: 0.95; }
-        .container-content { padding: 0 20px 20px 20px; }
         .filters {
             background: white;
             padding: 25px;
             border-radius: 12px;
-            background: white; padding: 25px; border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,146,69,0.1);
             margin-bottom: 20px;
             border-top: 4px solid #009245;
-            margin-bottom: 20px; border-top: 4px solid #009245;
         }
 
         .filter-row {
@@ -74,8 +66,6 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 20px;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px; margin-bottom: 20px;
         }
 
         .filter-group {
@@ -83,7 +73,10 @@
             flex-direction: column;
         }
 
-        .filter-group { display: flex; flex-direction: column; }
+        .filter-group.full-width {
+            grid-column: 1 / -1;
+        }
+
         label {
             font-weight: 600;
             margin-bottom: 8px;
@@ -91,8 +84,555 @@
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-weight: 600; margin-bottom: 8px; color: #009245;
-            font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        .search-input {
+            padding: 12px 12px 12px 40px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            transition: all 0.3s;
+            color: #58595B;
+            position: relative;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #009245;
+            pointer-events: none;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #009245;
+            box-shadow: 0 0 0 3px rgba(0, 146, 69, 0.1);
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .multiselect-container {
+            position: relative;
+        }
+
+        .multiselect-header {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            min-height: 46px;
+        }
+
+        .multiselect-header:hover {
+            border-color: #8BC53F;
+        }
+
+        .multiselect-header.active {
+            border-color: #009245;
+            box-shadow: 0 0 0 3px rgba(0, 146, 69, 0.1);
+        }
+
+        .multiselect-placeholder {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .multiselect-selected {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .multiselect-tag {
+            background: #009245;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .multiselect-tag-close {
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .multiselect-tag-close:hover {
+            color: #ffd700;
+        }
+
+        .multiselect-arrow {
+            color: #009245;
+            font-size: 12px;
+            transition: transform 0.3s;
+            margin-left: 8px;
+        }
+
+        .multiselect-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .multiselect-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #009245;
+            border-radius: 8px;
+            margin-top: 4px;
+            box-shadow: 0 4px 12px rgba(0, 146, 69, 0.2);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .multiselect-dropdown.show {
+            display: block;
+        }
+
+        .multiselect-search {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+
+        .multiselect-search input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .multiselect-search input:focus {
+            outline: none;
+            border-color: #009245;
+        }
+
+        .multiselect-options {
+            padding: 8px;
+        }
+
+        .multiselect-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .multiselect-option:hover {
+            background: #f0f4f0;
+        }
+
+        .multiselect-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #009245;
+        }
+
+        .multiselect-option label {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: normal;
+            cursor: pointer;
+            color: #58595B;
+            flex: 1;
+        }
+
+        .multiselect-actions {
+            padding: 10px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 8px;
+            background: #f8f9fa;
+        }
+
+        .multiselect-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .multiselect-btn-all {
+            background: #009245;
+            color: white;
+        }
+
+        .multiselect-btn-all:hover {
+            background: #007a38;
+        }
+
+        .multiselect-btn-clear {
+            background: #e0e0e0;
+            color: #58595B;
+        }
+
+        .multiselect-btn-clear:hover {
+            background: #d0d0d0;
+        }
+
+        .route-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,146,69,0.1);
+            margin-bottom: 20px;
+            border-left: 4px solid #009245;
+        }
+
+        .route-panel.collapsed {
+            padding: 15px 20px;
+        }
+
+        .route-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .route-header h3 {
+            font-size: 16px;
+            color: #009245;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .route-toggle {
+            color: #009245;
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .route-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .route-content {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .route-content.show {
+            display: block;
+        }
+
+        .route-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .route-input-wrapper {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .route-input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .route-input:focus {
+            outline: none;
+            border-color: #009245;
+            box-shadow: 0 0 0 3px rgba(0, 146, 69, 0.1);
+        }
+
+        .route-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #009245;
+            font-size: 18px;
+        }
+
+        .transport-modes {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .transport-mode {
+            flex: 1;
+            min-width: 80px;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            font-size: 12px;
+        }
+
+        .transport-mode:hover {
+            border-color: #8BC53F;
+        }
+
+        .transport-mode.active {
+            border-color: #009245;
+            background: linear-gradient(135deg, #009245 0%, #8BC53F 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        .transport-mode-icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .route-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-calculate-route {
+            flex: 1;
+            background: #009245;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-calculate-route:hover:not(:disabled) {
+            background: #007a38;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 146, 69, 0.3);
+        }
+
+        .btn-calculate-route:disabled {
+            background: #e0e0e0;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .btn-clear-route {
+            background: #e0e0e0;
+            color: #58595B;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-clear-route:hover {
+            background: #d0d0d0;
+        }
+
+        .route-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8fdf9 0%, #ffffff 100%);
+            border-radius: 8px;
+            border-left: 4px solid #009245;
+            display: none;
+        }
+
+        .route-info.show {
+            display: block;
+        }
+
+        .route-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .route-stat {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .route-stat-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .route-stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #009245;
+            margin-bottom: 3px;
+        }
+
+        .route-stat-label {
+            font-size: 11px;
+            color: #58595B;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .route-steps {
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .route-step {
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .route-step:last-child {
+            border-bottom: none;
+        }
+
+        .route-step-number {
+            background: #009245;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .route-step-instruction {
+            font-size: 13px;
+            color: #58595B;
+            flex: 1;
+        }
+
+        .selected-center-info {
+            padding: 10px;
+            background: #f0f4f0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .selected-center-info.show {
+            display: block;
+        }
+
+        .selected-center-name {
+            font-weight: 600;
+            color: #009245;
+            margin-bottom: 5px;
+        }
+
+        .selected-center-location {
+            font-size: 13px;
+            color: #58595B;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 6px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .checkbox-item:hover {
+            background: #f0f4f0;
+            border-color: #8BC53F;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #009245;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: normal;
+            cursor: pointer;
+            color: #58595B;
+            flex: 1;
+        }
+
+        .selected-count {
+            background: #009245;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
         }
 
         select {
@@ -110,15 +650,9 @@
             border-color: #8BC53F;
         }
 
-            padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;
-            font-size: 14px; background: white; cursor: pointer;
-            transition: all 0.3s; color: #58595B;
-        }
-        select:hover { border-color: #8BC53F; }
         select:focus {
             outline: none;
             border-color: #009245;
-            outline: none; border-color: #009245;
             box-shadow: 0 0 0 3px rgba(0, 146, 69, 0.1);
         }
 
@@ -128,7 +662,6 @@
             margin-top: 20px;
         }
 
-        .button-group { display: flex; gap: 12px; margin-top: 20px; }
         button {
             padding: 12px 24px;
             border: none;
@@ -139,45 +672,56 @@
             font-weight: 600;
         }
 
-            padding: 12px 24px; border: none; border-radius: 8px;
-            font-size: 15px; cursor: pointer; transition: all 0.3s; font-weight: 600;
-        }
         .btn-apply {
             background: #009245;
             color: white;
             flex: 1;
-            background: #009245; color: white; flex: 1;
         }
 
         .btn-apply:hover {
             background: #007a38;
             transform: translateY(-2px);
-            background: #007a38; transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 146, 69, 0.3);
         }
 
         .btn-reset {
             background: #8BC53F;
             color: white;
-            background: #8BC53F; color: white;
         }
 
         .btn-reset:hover {
             background: #7ab535;
             transform: translateY(-2px);
-            background: #7ab535; transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(139, 197, 63, 0.3);
+        }
+
+        .btn-pdf {
+            background: linear-gradient(135deg, #009245 0%, #8BC53F 100%);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .btn-pdf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 146, 69, 0.4);
+            border-color: #FFFFFF;
+        }
+
+        .btn-pdf:disabled {
+            background: #e0e0e0;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .map-container {
             background: white;
             border-radius: 12px;
             overflow: hidden;
-            background: white; border-radius: 12px; overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,146,69,0.15);
             height: 600px;
             border: 1px solid #e0e0e0;
-            height: 600px; border: 1px solid #e0e0e0;
         }
 
         #map {
@@ -185,21 +729,17 @@
             height: 100%;
         }
 
-        #map { width: 100%; height: 100%; }
         .stats {
             background: linear-gradient(135deg, #009245 0%, #8BC53F 100%);
             padding: 20px 25px;
             border-radius: 12px;
             margin-top: 20px;
-            padding: 20px 25px; border-radius: 12px; margin-top: 20px;
             box-shadow: 0 4px 12px rgba(0,146,69,0.2);
             display: flex;
             justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
-            display: flex; justify-content: space-around; align-items: center;
-            flex-wrap: wrap; gap: 20px;
         }
 
         .stat-item {
@@ -208,12 +748,9 @@
             align-items: center;
             gap: 5px;
             padding: 10px 20px;
-            display: flex; flex-direction: column; align-items: center;
-            gap: 5px; padding: 10px 20px;
             background: rgba(255,255,255,0.15);
             border-radius: 8px;
             backdrop-filter: blur(10px);
-            border-radius: 8px; backdrop-filter: blur(10px);
         }
 
         .stat-label {
@@ -222,15 +759,12 @@
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #FFFFFF; font-size: 13px; font-weight: 500;
-            text-transform: uppercase; letter-spacing: 1px;
         }
 
         .stat-value {
             color: #FFFFFF;
             font-weight: 700;
             font-size: 32px;
-            color: #FFFFFF; font-weight: 700; font-size: 32px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
@@ -240,8 +774,6 @@
             border-radius: 12px;
             margin-top: 20px;
             box-shadow: 0 2px 8px rgba(0,146,69,0.1);
-            background: white; padding: 25px; border-radius: 12px;
-            margin-top: 20px; box-shadow: 0 2px 8px rgba(0,146,69,0.1);
             border-top: 4px solid #009245;
         }
 
@@ -252,15 +784,12 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-size: 18px; margin-bottom: 15px; color: #009245;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
         }
 
         .legend-items {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 10px;
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px;
         }
 
         .legend-item {
@@ -276,19 +805,14 @@
 
         .legend-item:hover {
             background: #f0f4f0;
-            display: flex; align-items: center; gap: 10px; font-size: 13px;
-            padding: 8px; border-radius: 6px; transition: background 0.2s; color: #58595B;
         }
 
-        .legend-item:hover { background: #f0f4f0; }
         .legend-color {
             width: 24px;
             height: 24px;
             border-radius: 50%;
             border: 3px solid white;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            width: 24px; height: 24px; border-radius: 50%;
-            border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.2);
             flex-shrink: 0;
         }
 
@@ -313,6 +837,35 @@
                 grid-template-columns: 1fr;
             }
 
+            .multiselect-selected {
+                max-width: 250px;
+            }
+
+            .multiselect-tag {
+                font-size: 11px;
+                padding: 3px 8px;
+            }
+
+            .multiselect-dropdown {
+                max-height: 250px;
+            }
+
+            .transport-modes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .route-actions {
+                flex-direction: column;
+            }
+
+            .route-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .route-input-wrapper {
+                min-width: 100%;
+            }
+
             .map-container {
                 height: 450px;
             }
@@ -330,19 +883,9 @@
                 flex-direction: column;
             }
 
-            .btn-apply {
+            .btn-apply, .btn-pdf {
                 width: 100%;
             }
-            .header-banner { padding: 20px; }
-            .container-content { padding: 0 10px 10px 10px; }
-            h1 { font-size: 24px; }
-            .subtitle { font-size: 14px; }
-            .filter-row { grid-template-columns: 1fr; }
-            .map-container { height: 450px; }
-            .stats { flex-direction: column; padding: 15px; }
-            .stat-item { width: 100%; }
-            .button-group { flex-direction: column; }
-            .btn-apply { width: 100%; }
         }
     </style>
 </head>
@@ -354,17 +897,38 @@
         </div>
     </div>
 
-    
     <div class="container">
         <div class="container-content">
             <div class="filters">
                 <div class="filter-row">
-                    <div class="filter-group">
-                        <label for="familiaFilter">Familia Profesional</label>
-                        <select id="familiaFilter">
-                            <option value="">Todas las familias</option>
-                        </select>
-                        <select id="familiaFilter"><option value="">Todas las familias</option></select>
+                    <div class="filter-group full-width">
+                        <label for="searchInput">🔍 Buscar Centro</label>
+                        <div class="search-wrapper">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre de centro...">
+                        </div>
+                    </div>
+
+                    <div class="filter-group full-width">
+                        <label>Familias Profesionales</label>
+                        <div class="multiselect-container" id="familiaMultiselect">
+                            <div class="multiselect-header" onclick="toggleMultiselect()">
+                                <div class="multiselect-selected" id="multiselectSelected">
+                                    <span class="multiselect-placeholder">Selecciona una o más familias...</span>
+                                </div>
+                                <span class="multiselect-arrow">▼</span>
+                            </div>
+                            <div class="multiselect-dropdown" id="multiselectDropdown">
+                                <div class="multiselect-search">
+                                    <input type="text" id="multiselectSearch" placeholder="Buscar familia..." onclick="event.stopPropagation()">
+                                </div>
+                                <div class="multiselect-options" id="multiselectOptions"></div>
+                                <div class="multiselect-actions">
+                                    <button class="multiselect-btn multiselect-btn-all" onclick="selectAllFamilias(event)">Seleccionar todas</button>
+                                    <button class="multiselect-btn multiselect-btn-clear" onclick="clearAllFamilias(event)">Limpiar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="filter-group">
@@ -372,7 +936,6 @@
                         <select id="ensenanzaFilter">
                             <option value="">Todas las enseñanzas</option>
                         </select>
-                        <select id="ensenanzaFilter"><option value="">Todas las enseñanzas</option></select>
                     </div>
 
                     <div class="filter-group">
@@ -380,23 +943,73 @@
                         <select id="localidadFilter">
                             <option value="">Todas las localidades</option>
                         </select>
-                        <select id="localidadFilter"><option value="">Todas las localidades</option></select>
                     </div>
                 </div>
 
                 <div class="button-group">
                     <button class="btn-apply" onclick="applyFilters()">🔍 Aplicar Filtros</button>
                     <button class="btn-reset" onclick="resetFilters()">🔄 Limpiar Filtros</button>
+                    <button class="btn-pdf" onclick="generatePDF()" id="pdfButton">📄 Generar PDF</button>
                 </div>
             </div>
 
-            
+            <div class="route-panel collapsed" id="routePanel">
+                <div class="route-header" onclick="toggleRoutePanel()">
+                    <h3>🗺️ Calcular Ruta a Centro</h3>
+                    <span class="route-toggle" id="routeToggle">▼</span>
+                </div>
+                <div class="route-content" id="routeContent">
+                    <div class="selected-center-info" id="selectedCenterInfo">
+                        <div class="selected-center-name" id="selectedCenterName"></div>
+                        <div class="selected-center-location" id="selectedCenterLocation"></div>
+                    </div>
+
+                    <div class="route-input-group">
+                        <div class="route-input-wrapper">
+                            <span class="route-icon">📍</span>
+                            <input type="text" id="originInput" class="route-input" placeholder="Introduce tu dirección de origen...">
+                        </div>
+                    </div>
+
+                    <div class="transport-modes">
+                        <div class="transport-mode active" data-mode="DRIVING" onclick="selectTransportMode('DRIVING')">
+                            <span class="transport-mode-icon">🚗</span>
+                            <span>Coche</span>
+                        </div>
+                        <div class="transport-mode" data-mode="TRANSIT" onclick="selectTransportMode('TRANSIT')">
+                            <span class="transport-mode-icon">🚌</span>
+                            <span>Transporte</span>
+                        </div>
+                        <div class="transport-mode" data-mode="WALKING" onclick="selectTransportMode('WALKING')">
+                            <span class="transport-mode-icon">🚶</span>
+                            <span>A pie</span>
+                        </div>
+                        <div class="transport-mode" data-mode="BICYCLING" onclick="selectTransportMode('BICYCLING')">
+                            <span class="transport-mode-icon">🚴</span>
+                            <span>Bicicleta</span>
+                        </div>
+                    </div>
+
+                    <div class="route-actions">
+                        <button class="btn-calculate-route" id="calculateRouteBtn" onclick="calculateRoute()" disabled>
+                            🧭 Calcular Ruta
+                        </button>
+                        <button class="btn-clear-route" onclick="clearRoute()">
+                            ✕ Limpiar
+                        </button>
+                    </div>
+
+                    <div class="route-info" id="routeInfo">
+                        <div class="route-summary" id="routeSummary"></div>
+                        <div class="route-steps" id="routeSteps"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="map-container">
                 <div id="map"></div>
             </div>
-            <div class="map-container"><div id="map"></div></div>
 
-            
             <div class="stats">
                 <div class="stat-item">
                     <div class="stat-value" id="centrosCount">0</div>
@@ -408,7 +1021,6 @@
                 </div>
             </div>
 
-            
             <div class="legend">
                 <h3>Familias Profesionales</h3>
                 <div class="legend-items" id="legendItems"></div>
@@ -416,19 +1028,127 @@
         </div>
     </div>
 
-    <!-- Cargar los datos desde archivo externo -->
-    <!-- Archivo externo con datos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    
     <script src="datos.js"></script>
 
-
-    <!-- Script principal -->
     <script>
-        let map;
-        let markers = [];
-        let allData = [];
-        let infoWindow;
-
         let map, markers = [], allData = [], infoWindow;
+        let selectedFamilias = [];
+        let allFamilias = [];
+        let directionsService, directionsRenderer;
+        let autocomplete;
+        let selectedCenter = null;
+        let currentTransportMode = 'DRIVING';
+
+        // Exponer funciones globalmente ANTES de usarlas
+        window.toggleRoutePanel = function() {
+            const panel = document.getElementById('routePanel');
+            const content = document.getElementById('routeContent');
+            const toggle = document.getElementById('routeToggle');
+
+            panel.classList.toggle('collapsed');
+            content.classList.toggle('show');
+            toggle.classList.toggle('open');
+        };
+
+        window.selectCenterForRoute = function(nombre, localidad, lat, lng) {
+            selectedCenter = {
+                nombre: nombre,
+                localidad: localidad,
+                position: { lat: parseFloat(lat), lng: parseFloat(lng) }
+            };
+
+            // Mostrar información del centro seleccionado
+            document.getElementById('selectedCenterName').textContent = nombre;
+            document.getElementById('selectedCenterLocation').textContent = `📍 ${localidad}`;
+            document.getElementById('selectedCenterInfo').classList.add('show');
+
+            // Abrir panel de rutas si está cerrado
+            const panel = document.getElementById('routePanel');
+            if (panel.classList.contains('collapsed')) {
+                window.toggleRoutePanel();
+            }
+
+            // Scroll al panel de rutas
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Habilitar botón si hay origen
+            const originInput = document.getElementById('originInput');
+            document.getElementById('calculateRouteBtn').disabled = !originInput.value;
+
+            // Cerrar el infoWindow
+            if (infoWindow) {
+                infoWindow.close();
+            }
+        };
+
+        window.selectTransportMode = function(mode) {
+            currentTransportMode = mode;
+            
+            // Actualizar UI
+            document.querySelectorAll('.transport-mode').forEach(tm => {
+                tm.classList.remove('active');
+            });
+            document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+
+            // Si ya hay una ruta, recalcular
+            if (selectedCenter && document.getElementById('originInput').value) {
+                window.calculateRoute();
+            }
+        };
+
+        window.calculateRoute = async function() {
+            const originInput = document.getElementById('originInput').value;
+            if (!originInput || !selectedCenter) {
+                alert('Por favor, introduce una dirección de origen y selecciona un centro de destino.');
+                return;
+            }
+
+            const btn = document.getElementById('calculateRouteBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Calculando...';
+
+            const request = {
+                origin: originInput,
+                destination: selectedCenter.position,
+                travelMode: google.maps.TravelMode[currentTransportMode],
+                unitSystem: google.maps.UnitSystem.METRIC
+            };
+
+            try {
+                const result = await directionsService.route(request);
+                displayRoute(result);
+            } catch (error) {
+                console.error('Error al calcular la ruta:', error);
+                alert('No se pudo calcular la ruta. Intenta con otra dirección o modo de transporte.');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🧭 Calcular Ruta';
+            }
+        };
+
+        window.clearRoute = function() {
+            // Limpiar el renderer de rutas
+            directionsRenderer.setDirections({ routes: [] });
+
+            // Limpiar campos
+            document.getElementById('originInput').value = '';
+            document.getElementById('selectedCenterInfo').classList.remove('show');
+            document.getElementById('routeInfo').classList.remove('show');
+            document.getElementById('calculateRouteBtn').disabled = true;
+
+            // Limpiar centro seleccionado
+            selectedCenter = null;
+
+            // Restaurar vista del mapa
+            if (markers.length > 0) {
+                const bounds = new google.maps.LatLngBounds();
+                markers.forEach(marker => bounds.extend(marker.position));
+                map.fitBounds(bounds);
+            }
+        };
 
         const familyColors = {
             'Informática y Comunicaciones': '#3498db',
@@ -459,30 +1179,57 @@
 
         async function initMap() {
             try {
-                // Esperar a que Google Maps esté disponible
                 while (!window.google || !window.google.maps) {
                     await new Promise(resolve => setTimeout(resolve, 100));
                 }
 
-                // Importar las librerías necesarias
                 const { Map } = await google.maps.importLibrary("maps");
                 const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
-
-                // Crear el mapa con mapId (requerido para AdvancedMarkerElement)
 
                 map = new Map(document.getElementById("map"), {
                     zoom: 9,
                     center: { lat: 36.7213, lng: -4.4214 },
-                    mapId: 'DEMO_MAP_ID', // Puedes usar este ID de demo o crear uno propio
+                    mapId: 'DEMO_MAP_ID',
                     mapTypeControl: true,
                     streetViewControl: true,
                     fullscreenControl: true,
                     zoomControl: true
-                    mapId: 'DEMO_MAP_ID',
                 });
 
-
                 infoWindow = new google.maps.InfoWindow();
+
+                // Inicializar servicios de rutas
+                directionsService = new google.maps.DirectionsService();
+                directionsRenderer = new google.maps.DirectionsRenderer({
+                    map: map,
+                    suppressMarkers: false,
+                    polylineOptions: {
+                        strokeColor: '#009245',
+                        strokeWeight: 5,
+                        strokeOpacity: 0.8
+                    }
+                });
+
+                // Inicializar autocomplete para el origen
+                await google.maps.importLibrary("places");
+                const originInput = document.getElementById('originInput');
+                autocomplete = new google.maps.places.Autocomplete(originInput, {
+                    componentRestrictions: { country: 'es' },
+                    fields: ['geometry', 'formatted_address', 'name']
+                });
+
+                autocomplete.addListener('place_changed', () => {
+                    const place = autocomplete.getPlace();
+                    if (place.geometry) {
+                        document.getElementById('calculateRouteBtn').disabled = !selectedCenter;
+                    }
+                });
+
+                // Event listener para habilitar botón cuando se escribe
+                originInput.addEventListener('input', () => {
+                    const btn = document.getElementById('calculateRouteBtn');
+                    btn.disabled = !(originInput.value && selectedCenter);
+                });
 
                 loadData();
                 populateFilters();
@@ -490,15 +1237,11 @@
                 displayMarkers(allData);
             } catch (error) {
                 console.error('Error initializing map:', error);
-                document.getElementById('map').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#e74c3c;text-align:center;padding:20px;"><p>⚠️ Error al cargar el mapa.<br><small>' + error.message + '</small><br><br>Asegúrate de:<br>1. Tener una API Key válida<br>2. Haber activado "Maps JavaScript API" en Google Cloud Console</p></div>';
-            } catch (err) {
-                console.error('Error initializing map:', err);
-                document.getElementById('map').innerHTML = '<p style="color:red;text-align:center;margin-top:100px;">⚠️ Error al cargar el mapa</p>';
+                document.getElementById('map').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#e74c3c;text-align:center;padding:20px;"><p>⚠️ Error al cargar el mapa.<br><small>' + error.message + '</small></p></div>';
             }
         }
 
         function loadData() {
-            // Los datos vienen del archivo datos.js como variable CENTROS_DATA
             if (typeof CENTROS_DATA !== 'undefined') {
                 allData = CENTROS_DATA.filter(d => d.latitud && d.longitud);
                 console.log('Datos cargados:', allData.length, 'registros');
@@ -512,35 +1255,42 @@
             const ensenanzas = [...new Set(allData.map(d => d.ENSEÑANZA))].filter(Boolean).sort();
             const localidades = [...new Set(allData.map(d => d.LOCALIDAD))].filter(Boolean).sort();
 
-            const familiaSelect = document.getElementById('familiaFilter');
-            familias.forEach(f => {
-                const option = document.createElement('option');
-                option.value = f;
-                option.textContent = f;
-                familiaSelect.appendChild(option);
+            allFamilias = familias;
+
+            // Crear opciones del multiselect
+            const optionsContainer = document.getElementById('multiselectOptions');
+            familias.forEach((f, index) => {
+                const option = document.createElement('div');
+                option.className = 'multiselect-option';
+                option.setAttribute('data-familia', f);
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `familia_${index}`;
+                checkbox.value = f;
+                checkbox.addEventListener('change', () => updateMultiselectSelection());
+
+                const label = document.createElement('label');
+                label.htmlFor = `familia_${index}`;
+                label.textContent = f;
+                label.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    checkbox.checked = !checkbox.checked;
+                    updateMultiselectSelection();
+                });
+
+                option.appendChild(checkbox);
+                option.appendChild(label);
+                optionsContainer.appendChild(option);
             });
 
-            const ensenanzaSelect = document.getElementById('ensenanzaFilter');
-            ensenanzas.forEach(e => {
-                const option = document.createElement('option');
-                option.value = e;
-                option.textContent = e;
-                ensenanzaSelect.appendChild(option);
-            });
-
-            const localidadSelect = document.getElementById('localidadFilter');
-            localidades.forEach(l => {
-                const option = document.createElement('option');
-                option.value = l;
-                option.textContent = l;
-                localidadSelect.appendChild(option);
-            });
-
-            for (const [selectId, values] of Object.entries({
-                familiaFilter: familias,
+            // Populate otros selects
+            const selects = {
                 ensenanzaFilter: ensenanzas,
                 localidadFilter: localidades
-            })) {
+            };
+
+            for (const [selectId, values] of Object.entries(selects)) {
                 const select = document.getElementById(selectId);
                 values.forEach(v => {
                     const opt = document.createElement('option');
@@ -548,62 +1298,146 @@
                     select.appendChild(opt);
                 });
             }
+
+            // Event listener para búsqueda en tiempo real
+            document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+            // Event listener para búsqueda dentro del multiselect
+            document.getElementById('multiselectSearch').addEventListener('input', filterMultiselectOptions);
+
+            // Cerrar dropdown al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                const container = document.getElementById('familiaMultiselect');
+                if (!container.contains(e.target)) {
+                    closeMultiselect();
+                }
+            });
+        }
+
+        function toggleMultiselect() {
+            const dropdown = document.getElementById('multiselectDropdown');
+            const arrow = document.querySelector('.multiselect-arrow');
+            const header = document.querySelector('.multiselect-header');
+            
+            dropdown.classList.toggle('show');
+            arrow.classList.toggle('open');
+            header.classList.toggle('active');
+        }
+
+        function closeMultiselect() {
+            const dropdown = document.getElementById('multiselectDropdown');
+            const arrow = document.querySelector('.multiselect-arrow');
+            const header = document.querySelector('.multiselect-header');
+            
+            dropdown.classList.remove('show');
+            arrow.classList.remove('open');
+            header.classList.remove('active');
+        }
+
+        function updateMultiselectSelection() {
+            const checkboxes = document.querySelectorAll('#multiselectOptions input[type="checkbox"]:checked');
+            selectedFamilias = Array.from(checkboxes).map(cb => cb.value);
+            
+            const selectedContainer = document.getElementById('multiselectSelected');
+            selectedContainer.innerHTML = '';
+
+            if (selectedFamilias.length === 0) {
+                selectedContainer.innerHTML = '<span class="multiselect-placeholder">Selecciona una o más familias...</span>';
+            } else {
+                selectedFamilias.forEach(familia => {
+                    const tag = document.createElement('div');
+                    tag.className = 'multiselect-tag';
+                    tag.innerHTML = `
+                        ${familia}
+                        <span class="multiselect-tag-close" onclick="removeFamilia(event, '${familia}')">×</span>
+                    `;
+                    selectedContainer.appendChild(tag);
+                });
+            }
+        }
+
+        function removeFamilia(event, familia) {
+            event.stopPropagation();
+            const checkbox = document.querySelector(`#multiselectOptions input[value="${familia}"]`);
+            if (checkbox) {
+                checkbox.checked = false;
+                updateMultiselectSelection();
+                applyFilters();
+            }
+        }
+
+        function filterMultiselectOptions() {
+            const searchTerm = document.getElementById('multiselectSearch').value.toLowerCase();
+            const options = document.querySelectorAll('.multiselect-option');
+
+            options.forEach(option => {
+                const familia = option.getAttribute('data-familia').toLowerCase();
+                if (familia.includes(searchTerm)) {
+                    option.style.display = 'flex';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        }
+
+        function selectAllFamilias(event) {
+            event.stopPropagation();
+            const checkboxes = document.querySelectorAll('#multiselectOptions input[type="checkbox"]');
+            const visibleCheckboxes = Array.from(checkboxes).filter(cb => 
+                cb.closest('.multiselect-option').style.display !== 'none'
+            );
+            
+            visibleCheckboxes.forEach(cb => cb.checked = true);
+            updateMultiselectSelection();
+            applyFilters();
+        }
+
+        function clearAllFamilias(event) {
+            event.stopPropagation();
+            const checkboxes = document.querySelectorAll('#multiselectOptions input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+            updateMultiselectSelection();
+            applyFilters();
         }
 
         function createLegend() {
             const legendItems = document.getElementById('legendItems');
             const familias = [...new Set(allData.map(d => d['Familia Profesional']))].filter(Boolean).sort();
 
-            familias.forEach(familia => {
             familias.forEach(f => {
                 const item = document.createElement('div');
                 item.className = 'legend-item';
 
                 const color = document.createElement('div');
                 color.className = 'legend-color';
-                color.style.backgroundColor = familyColors[familia] || '#95a5a6';
-
                 color.style.backgroundColor = familyColors[f] || '#95a5a6';
-                const text = document.createElement('span');
-                text.textContent = familia;
 
-                item.appendChild(color);
-                item.appendChild(text);
+                const text = document.createElement('span');
                 text.textContent = f;
+
                 item.append(color, text);
                 legendItems.appendChild(item);
             });
         }
 
         async function displayMarkers(data) {
-            markers.forEach(marker => marker.map = null);
             markers.forEach(m => m.map = null);
             markers = [];
 
-            // Importar las librerías de marcadores
             const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
-
-            const groupedByCentro = {};
-            data.forEach(item => {
-                const key = `${item.Centro}_${item.latitud}_${item.longitud}`;
-                if (!groupedByCentro[key]) {
-                    groupedByCentro[key] = {
-                        centro: item.Centro,
-                        localidad: item.LOCALIDAD,
-                        lat: item.latitud,
-                        lng: item.longitud,
-                        ciclos: []
-                    };
-                }
-                groupedByCentro[key].ciclos.push({
-                    ciclo: item['Ciclo Formativo'],
-                    familia: item['Familia Profesional'],
-                    ensenanza: item.ENSEÑANZA
 
             const grouped = {};
             data.forEach(d => {
                 const key = `${d.Centro}_${d.latitud}_${d.longitud}`;
-                if (!grouped[key]) grouped[key] = { ...d, ciclos: [] };
+                if (!grouped[key]) {
+                    grouped[key] = {
+                        Centro: d.Centro,
+                        LOCALIDAD: d.LOCALIDAD,
+                        latitud: d.latitud,
+                        longitud: d.longitud,
+                        ciclos: []
+                    };
+                }
                 grouped[key].ciclos.push({
                     ciclo: d['Ciclo Formativo'],
                     familia: d['Familia Profesional'],
@@ -611,36 +1445,27 @@
                 });
             });
 
-
             const bounds = new google.maps.LatLngBounds();
 
-            Object.values(groupedByCentro).forEach(centro => {
-                const familiasPrincipales = [...new Set(centro.ciclos.map(c => c.familia))];
-                const color = familyColors[familiasPrincipales[0]] || '#95a5a6';
-
-                // Crear un pin personalizado con el color de la familia profesional
-                const pinElement = new PinElement({
+            Object.values(grouped).forEach(centro => {
+                const color = familyColors[centro.ciclos[0].familia] || '#95a5a6';
+                const pin = new PinElement({
                     background: color,
                     borderColor: '#ffffff',
                     glyphColor: '#ffffff',
                     scale: 1.2
                 });
 
-
-            Object.values(grouped).forEach(centro => {
-                const color = familyColors[centro.ciclos[0].familia] || '#95a5a6';
-                const pin = new PinElement({ background: color, borderColor: '#fff', glyphColor: '#fff' });
                 const marker = new AdvancedMarkerElement({
                     map: map,
-                    position: { lat: centro.lat, lng: centro.lng },
-                    title: centro.centro,
-                    content: pinElement.element
-                    map, position: { lat: centro.latitud, lng: centro.longitud }, title: centro.Centro, content: pin.element
+                    position: { lat: centro.latitud, lng: centro.longitud },
+                    title: centro.Centro,
+                    content: pin.element
                 });
 
                 marker.addListener('click', () => {
                     const ciclosHTML = centro.ciclos.map(c => `
-                        <div style="margin: 10px 0; padding: 12px; background: linear-gradient(135deg, #f8fdf9 0%, #ffffff 100%); border-radius: 8px; border-left: 4px solid ${familyColors[c.familia] || '#95a5a6'}; transition: transform 0.2s;">
+                        <div style="margin: 10px 0; padding: 12px; background: linear-gradient(135deg, #f8fdf9 0%, #ffffff 100%); border-radius: 8px; border-left: 4px solid ${familyColors[c.familia] || '#95a5a6'};">
                             <div style="font-weight: 600; color: #009245; font-size: 14px; margin-bottom: 6px; line-height: 1.4;">${c.ciclo}</div>
                             <div style="display: flex; flex-direction: column; gap: 4px;">
                                 <div style="display: flex; align-items: center; gap: 6px;">
@@ -654,18 +1479,26 @@
                         </div>
                     `).join('');
 
+                    // Escapar comillas simples en los nombres
+                    const nombreEscapado = centro.Centro.replace(/'/g, "\\'");
+                    const localidadEscapada = centro.LOCALIDAD.replace(/'/g, "\\'");
+
                     const content = `
                         <div style="min-width: 320px; max-width: 380px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                             <div style="background: linear-gradient(135deg, #009245 0%, #8BC53F 100%); padding: 20px; margin: -20px -20px 15px -20px; border-radius: 12px 12px 0 0;">
-                                <h3 style="margin: 0; color: #FFFFFF; font-size: 18px; font-weight: 700; line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">${centro.centro}</h3>
+                                <h3 style="margin: 0; color: #FFFFFF; font-size: 18px; font-weight: 700; line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">${centro.Centro}</h3>
                                 <div style="margin-top: 8px; display: flex; align-items: center; gap: 6px; color: #FFFFFF; font-size: 14px; opacity: 0.95;">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                     </svg>
-                                    ${centro.localidad}
+                                    ${centro.LOCALIDAD}
                                 </div>
                             </div>
                             <div style="padding: 0 5px;">
+                                <button onclick="selectCenterForRoute('${nombreEscapado}', '${localidadEscapada}', ${centro.latitud}, ${centro.longitud})" 
+                                    style="width: 100%; padding: 12px; margin-bottom: 15px; background: linear-gradient(135deg, #009245 0%, #8BC53F 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px; transition: all 0.3s;">
+                                    🗺️ Calcular ruta hasta aquí
+                                </button>
                                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 10px; background: #f0f4f0; border-radius: 8px;">
                                     <span style="color: #009245; font-weight: 700; font-size: 15px;">Ciclos formativos</span>
                                     <span style="background: #009245; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700;">${centro.ciclos.length}</span>
@@ -678,12 +1511,10 @@
                     `;
 
                     infoWindow.setContent(content);
-                    infoWindow.setContent(`<strong>${centro.Centro}</strong><br>${centro.LOCALIDAD}<br>${centro.ciclos.length} ciclos`);
                     infoWindow.open(map, marker);
                 });
 
                 markers.push(marker);
-                bounds.extend({ lat: centro.lat, lng: centro.lng });
                 bounds.extend(marker.position);
             });
 
@@ -694,73 +1525,302 @@
                 }
             }
 
-
-            if (markers.length) map.fitBounds(bounds);
             updateStats(data);
         }
 
         function updateStats(data) {
             const centros = new Set(data.map(d => `${d.Centro}_${d.latitud}_${d.longitud}`));
             document.getElementById('centrosCount').textContent = centros.size;
-            document.getElementById('centrosCount').textContent = new Set(data.map(d => d.Centro)).size;
             document.getElementById('ciclosCount').textContent = data.length;
+            
+            // Habilitar/deshabilitar botón PDF
+            const pdfButton = document.getElementById('pdfButton');
+            if (data.length > 0) {
+                pdfButton.disabled = false;
+            } else {
+                pdfButton.disabled = true;
+            }
         }
 
         function applyFilters() {
-            const familia = document.getElementById('familiaFilter').value;
-            const ensenanza = document.getElementById('ensenanzaFilter').value;
-            const localidad = document.getElementById('localidadFilter').value;
-
-            const f = document.getElementById('familiaFilter').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
             const e = document.getElementById('ensenanzaFilter').value;
             const l = document.getElementById('localidadFilter').value;
+
             let filtered = allData;
 
-            if (familia) {
-                filtered = filtered.filter(d => d['Familia Profesional'] === familia);
-            }
-            if (ensenanza) {
-                filtered = filtered.filter(d => d.ENSEÑANZA === ensenanza);
-            }
-            if (localidad) {
-                filtered = filtered.filter(d => d.LOCALIDAD === localidad);
+            // Filtrar por búsqueda de centro
+            if (searchTerm) {
+                filtered = filtered.filter(d => d.Centro.toLowerCase().includes(searchTerm));
             }
 
-            if (f) filtered = filtered.filter(d => d['Familia Profesional'] === f);
-            if (e) filtered = filtered.filter(d => d.ENSEÑANZA === e);
-            if (l) filtered = filtered.filter(d => d.LOCALIDAD === l);
+            // Filtrar por familias (si hay alguna seleccionada)
+            if (selectedFamilias.length > 0) {
+                filtered = filtered.filter(d => selectedFamilias.includes(d['Familia Profesional']));
+            }
+
+            // Filtrar por enseñanza
+            if (e) {
+                filtered = filtered.filter(d => d.ENSEÑANZA === e);
+            }
+
+            // Filtrar por localidad
+            if (l) {
+                filtered = filtered.filter(d => d.LOCALIDAD === l);
+            }
+
             displayMarkers(filtered);
         }
 
         function resetFilters() {
-            document.getElementById('familiaFilter').value = '';
+            document.getElementById('searchInput').value = '';
             document.getElementById('ensenanzaFilter').value = '';
             document.getElementById('localidadFilter').value = '';
+            
+            // Limpiar multiselect
+            const checkboxes = document.querySelectorAll('#multiselectOptions input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+            updateMultiselectSelection();
+            
+            // Limpiar búsqueda del multiselect
+            document.getElementById('multiselectSearch').value = '';
+            filterMultiselectOptions();
+            
             displayMarkers(allData);
         }
 
-        // Inicializar cuando la página esté lista
+        async function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            
+            // Obtener datos filtrados actuales
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const e = document.getElementById('ensenanzaFilter').value;
+            const l = document.getElementById('localidadFilter').value;
+
+            let filtered = allData;
+
+            if (searchTerm) {
+                filtered = filtered.filter(d => d.Centro.toLowerCase().includes(searchTerm));
+            }
+
+            if (selectedFamilias.length > 0) {
+                filtered = filtered.filter(d => selectedFamilias.includes(d['Familia Profesional']));
+            }
+
+            if (e) {
+                filtered = filtered.filter(d => d.ENSEÑANZA === e);
+            }
+
+            if (l) {
+                filtered = filtered.filter(d => d.LOCALIDAD === l);
+            }
+
+            if (filtered.length === 0) {
+                alert('No hay centros para exportar con los filtros actuales');
+                return;
+            }
+
+            // Agrupar por centro
+            const grouped = {};
+            filtered.forEach(d => {
+                const key = `${d.Centro}_${d.latitud}_${d.longitud}`;
+                if (!grouped[key]) {
+                    grouped[key] = {
+                        Centro: d.Centro,
+                        LOCALIDAD: d.LOCALIDAD,
+                        ciclos: []
+                    };
+                }
+                grouped[key].ciclos.push({
+                    ciclo: d['Ciclo Formativo'],
+                    familia: d['Familia Profesional'],
+                    ensenanza: d.ENSEÑANZA
+                });
+            });
+
+            const centros = Object.values(grouped);
+
+            // Crear PDF
+            const doc = new jsPDF();
+            const pageWidth = doc.internal.pageSize.width;
+            const pageHeight = doc.internal.pageSize.height;
+
+            // Encabezado con gradiente (simulado con rectángulos)
+            doc.setFillColor(0, 146, 69);
+            doc.rect(0, 0, pageWidth, 35, 'F');
+
+            // Título
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(18);
+            doc.setFont(undefined, 'bold');
+            doc.text('Centros de Formación Profesional - Málaga', pageWidth / 2, 15, { align: 'center' });
+
+            // Subtítulo
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text('Consejería de Desarrollo Educativo y Formación Profesional', pageWidth / 2, 23, { align: 'center' });
+            
+            // Fecha de generación
+            const fecha = new Date().toLocaleDateString('es-ES', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            doc.setFontSize(8);
+            doc.text(`Generado el: ${fecha}`, pageWidth / 2, 30, { align: 'center' });
+
+            // Información de filtros aplicados
+            let yPos = 45;
+            doc.setTextColor(0, 146, 69);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Filtros Aplicados:', 14, yPos);
+
+            yPos += 7;
+            doc.setFontSize(9);
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(88, 89, 91);
+
+            if (searchTerm) {
+                doc.text(`• Búsqueda: "${searchTerm}"`, 14, yPos);
+                yPos += 5;
+            }
+
+            if (selectedFamilias.length > 0) {
+                const familiasText = selectedFamilias.length > 3 
+                    ? `${selectedFamilias.slice(0, 3).join(', ')}... (+${selectedFamilias.length - 3} más)`
+                    : selectedFamilias.join(', ');
+                doc.text(`• Familias: ${familiasText}`, 14, yPos);
+                yPos += 5;
+            }
+
+            if (e) {
+                doc.text(`• Enseñanza: ${e}`, 14, yPos);
+                yPos += 5;
+            }
+
+            if (l) {
+                doc.text(`• Localidad: ${l}`, 14, yPos);
+                yPos += 5;
+            }
+
+            // Resumen de resultados
+            yPos += 3;
+            doc.setFillColor(240, 244, 240);
+            doc.roundedRect(14, yPos, pageWidth - 28, 12, 2, 2, 'F');
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(0, 146, 69);
+            doc.text(`Total de centros encontrados: ${centros.length} | Ciclos formativos: ${filtered.length}`, pageWidth / 2, yPos + 7, { align: 'center' });
+
+            yPos += 20;
+
+            // Generar tabla para cada centro
+            centros.forEach((centro, index) => {
+                // Verificar si necesitamos una nueva página
+                if (yPos > pageHeight - 40) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+
+                // Nombre del centro
+                doc.setFillColor(0, 146, 69);
+                doc.roundedRect(14, yPos, pageWidth - 28, 8, 2, 2, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(11);
+                doc.setFont(undefined, 'bold');
+                doc.text(`${index + 1}. ${centro.Centro}`, 16, yPos + 5.5);
+
+                yPos += 10;
+
+                // Localidad
+                doc.setTextColor(88, 89, 91);
+                doc.setFontSize(9);
+                doc.setFont(undefined, 'normal');
+                doc.text(`📍 ${centro.LOCALIDAD}`, 16, yPos);
+                yPos += 2;
+
+                // Tabla de ciclos
+                const tableData = centro.ciclos.map(c => [
+                    c.ciclo,
+                    c.familia,
+                    c.ensenanza
+                ]);
+
+                doc.autoTable({
+                    startY: yPos,
+                    head: [['Ciclo Formativo', 'Familia Profesional', 'Enseñanza']],
+                    body: tableData,
+                    theme: 'striped',
+                    headStyles: {
+                        fillColor: [139, 197, 63],
+                        textColor: [255, 255, 255],
+                        fontSize: 9,
+                        fontStyle: 'bold'
+                    },
+                    bodyStyles: {
+                        fontSize: 8,
+                        textColor: [88, 89, 91]
+                    },
+                    alternateRowStyles: {
+                        fillColor: [248, 253, 249]
+                    },
+                    margin: { left: 14, right: 14 },
+                    columnStyles: {
+                        0: { cellWidth: 70 },
+                        1: { cellWidth: 65 },
+                        2: { cellWidth: 45 }
+                    }
+                });
+
+                yPos = doc.lastAutoTable.finalY + 8;
+            });
+
+            // Pie de página en la última página
+            const totalPages = doc.internal.pages.length - 1;
+            for (let i = 1; i <= totalPages; i++) {
+                doc.setPage(i);
+                doc.setFontSize(8);
+                doc.setTextColor(150, 150, 150);
+                doc.text(
+                    `Página ${i} de ${totalPages}`,
+                    pageWidth / 2,
+                    pageHeight - 10,
+                    { align: 'center' }
+                );
+            }
+
+            // Guardar PDF
+            const nombreArchivo = `centros-fp-malaga-${new Date().getTime()}.pdf`;
+            doc.save(nombreArchivo);
+        }
+
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initMap);
         } else {
             initMap();
         }
+
+        // Hacer funciones accesibles globalmente para onclick
+        window.toggleRoutePanel = toggleRoutePanel;
+        window.selectCenterForRoute = selectCenterForRoute;
+        window.selectTransportMode = selectTransportMode;
+        window.calculateRoute = calculateRoute;
+        window.clearRoute = clearRoute;
+        window.applyFilters = applyFilters;
+        window.resetFilters = resetFilters;
+        window.generatePDF = generatePDF;
+        window.toggleMultiselect = toggleMultiselect;
+        window.removeFamilia = removeFamilia;
+        window.selectAllFamilias = selectAllFamilias;
+        window.clearAllFamilias = clearAllFamilias;
     </script>
 
-    <!-- Cargar Google Maps API de forma asíncrona -->
-    <script>
-        (function(d, s, id) {
-            var js, gjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            // Importante: Incluir el parámetro v=beta para usar AdvancedMarkerElement
-            js.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyANqujWU86Yfi_1vfhTKxc1hr3s6Hce0tA&v=beta&loading=async';
-            gjs.parentNode.insertBefore(js, gjs);
-        }(document, 'script', 'google-maps-api'));
-
-    <!-- Google Maps con callback (carga garantizada) -->
     <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANqujWU86Yfi_1vfhTKxc1hr3s6Hce0tA&v=beta&loading=async&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANqujWU86Yfi_1vfhTKxc1hr3s6Hce0tA&libraries=places&v=beta&loading=async&callback=initMap">
     </script>
 </body>
 </html>
