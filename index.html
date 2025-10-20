@@ -886,6 +886,357 @@
             .btn-apply, .btn-pdf {
                 width: 100%;
             }
+            /* Estilos para el listado de resultados */
+        .results-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0,146,69,0.1);
+            border-top: 4px solid #009245;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .results-header h3 {
+            font-size: 18px;
+            color: #009245;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-toggle-view {
+            background: white;
+            color: #009245;
+            border: 2px solid #009245;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-toggle-view:hover {
+            background: #009245;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 146, 69, 0.3);
+        }
+
+        .results-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .results-list.compact {
+            gap: 10px;
+        }
+
+        .center-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fdf9 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 5px solid #009245;
+            box-shadow: 0 2px 8px rgba(0,146,69,0.08);
+            transition: all 0.3s;
+        }
+
+        .center-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,146,69,0.15);
+        }
+
+        .center-card.compact {
+            padding: 15px;
+        }
+
+        .center-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+
+        .center-info {
+            flex: 1;
+        }
+
+        .center-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #009245;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .compact .center-name {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .center-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #58595B;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .center-location svg {
+            fill: #009245;
+            flex-shrink: 0;
+        }
+
+        .center-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .center-stat-badge {
+            background: #f0f4f0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #009245;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .center-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-view-map {
+            background: #009245;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-view-map:hover {
+            background: #007a38;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 146, 69, 0.3);
+        }
+
+        .btn-route {
+            background: white;
+            color: #009245;
+            border: 2px solid #009245;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-route:hover {
+            background: #009245;
+            color: white;
+        }
+
+        .compact .btn-view-map,
+        .compact .btn-route {
+            padding: 6px 12px;
+            font-size: 11px;
+        }
+
+        .ciclos-list {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #f0f4f0;
+        }
+
+        .compact .ciclos-list {
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .ciclos-header {
+            font-weight: 700;
+            color: #009245;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .compact .ciclos-header {
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .ciclos-toggle {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            margin: -8px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .ciclos-toggle:hover {
+            background: #f0f4f0;
+        }
+
+        .toggle-icon {
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        .toggle-icon.open {
+            transform: rotate(180deg);
+        }
+
+        .ciclos-items {
+            display: grid;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .compact .ciclos-items {
+            gap: 6px;
+        }
+
+        .ciclos-items.collapsed {
+            display: none;
+        }
+
+        .ciclo-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: all 0.2s;
+        }
+
+        .compact .ciclo-item {
+            padding: 8px;
+        }
+
+        .ciclo-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .ciclo-name {
+            font-weight: 600;
+            color: #009245;
+            font-size: 14px;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .compact .ciclo-name {
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .ciclo-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .ciclo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: #58595B;
+        }
+
+        .compact .ciclo-badge {
+            font-size: 10px;
+        }
+
+        .ciclo-familia {
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .no-results-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .no-results-text {
+            font-size: 16px;
+            color: #58595B;
+        }
+
+        @media (max-width: 768px) {
+            .results-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .results-actions {
+                width: 100%;
+            }
+
+            .btn-toggle-view {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .center-header {
+                flex-direction: column;
+            }
+
+            .center-actions {
+                flex-direction: row;
+                width: 100%;
+            }
+
+            .btn-view-map,
+            .btn-route {
+                flex: 1;
+            }
+        }
         }
     </style>
 </head>
@@ -1020,6 +1371,23 @@
                     <div class="stat-label">Ciclos formativos</div>
                 </div>
             </div>
+            <!-- 👇 NUEVO: Listado de centros -->
+<div class="results-container" id="resultsContainer">
+    <div class="results-header">
+        <h3>📋 Listado de Centros</h3>
+        <div class="results-actions">
+            <button class="btn-toggle-view" id="toggleViewBtn" onclick="toggleListView()">
+                <span id="viewIcon">📑</span> <span id="viewText">Vista Compacta</span>
+            </button>
+        </div>
+    </div>
+    <div class="results-list" id="resultsList">
+        <div class="no-results">
+            <div class="no-results-icon">🔍</div>
+            <div class="no-results-text">Cargando centros...</div>
+        </div>
+    </div>
+</div>
 
             <div class="legend">
                 <h3>Familias Profesionales</h3>
@@ -1834,4 +2202,5 @@
     </script>
 </body>
 </html>
+
 
