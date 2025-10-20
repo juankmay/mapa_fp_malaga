@@ -773,7 +773,7 @@ async function generatePDF() {
         doc.setTextColor(88, 89, 91);
         doc.setFontSize(9);
         doc.setFont(undefined, 'normal');
-        doc.text(`📍 ${centro.LOCALIDAD}`, 16, yPos);
+        doc.text(`Localidad: ${centro.LOCALIDAD}`, 16, yPos);
         yPos += 2;
 
         const tableData = centro.ciclos.map(c => [
@@ -839,4 +839,5 @@ window.resetFilters = resetFilters;
 window.generatePDF = generatePDF;
 window.toggleListView = toggleListView;
 window.toggleCiclos = toggleCiclos;
+
 window.focusOnCenter = focusOnCenter;
