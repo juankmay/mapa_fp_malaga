@@ -1251,68 +1251,78 @@
         }
 
         function populateFilters() {
-            const familias = [...new Set(allData.map(d => d['Familia Profesional']))].filter(Boolean).sort();
-            const ensenanzas = [...new Set(allData.map(d => d.ENSEÑANZA))].filter(Boolean).sort();
-            const localidades = [...new Set(allData.map(d => d.LOCALIDAD))].filter(Boolean).sort();
+    const familias = [...new Set(allData.map(d => d['Familia Profesional']))].filter(Boolean).sort();
+    const ensenanzas = [...new Set(allData.map(d => d.ENSEÑANZA))].filter(Boolean).sort();
+    const localidades = [...new Set(allData.map(d => d.LOCALIDAD))].filter(Boolean).sort();
 
-            allFamilias = familias;
+    allFamilias = familias;
 
-            // Crear opciones del multiselect
-            const optionsContainer = document.getElementById('multiselectOptions');
-            familias.forEach((f, index) => {
-                const option = document.createElement('div');
-                option.className = 'multiselect-option';
-                option.setAttribute('data-familia', f);
+    // Crear opciones del multiselect
+    const optionsContainer = document.getElementById('multiselectOptions');
+    optionsContainer.innerHTML = ''; // 👈 LIMPIAR ANTES
+    
+    familias.forEach((f, index) => {
+        const option = document.createElement('div');
+        option.className = 'multiselect-option';
+        option.setAttribute('data-familia', f);
 
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.id = `familia_${index}`;
-                checkbox.value = f;
-                checkbox.addEventListener('change', () => updateMultiselectSelection());
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `familia_${index}`;
+        checkbox.value = f;
+        checkbox.addEventListener('change', () => updateMultiselectSelection());
 
-                const label = document.createElement('label');
-                label.htmlFor = `familia_${index}`;
-                label.textContent = f;
-                label.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    checkbox.checked = !checkbox.checked;
-                    updateMultiselectSelection();
-                });
+        const label = document.createElement('label');
+        label.htmlFor = `familia_${index}`;
+        label.textContent = f;
+        label.addEventListener('click', (e) => {
+            e.preventDefault();
+            checkbox.checked = !checkbox.checked;
+            updateMultiselectSelection();
+        });
 
-                option.appendChild(checkbox);
-                option.appendChild(label);
-                optionsContainer.appendChild(option);
-            });
+        option.appendChild(checkbox);
+        option.appendChild(label);
+        optionsContainer.appendChild(option);
+    });
 
-            // Populate otros selects
-            const selects = {
-                ensenanzaFilter: ensenanzas,
-                localidadFilter: localidades
-            };
+    // Populate otros selects - ✅ VERSIÓN CORREGIDA
+    const selects = {
+        ensenanzaFilter: ensenanzas,
+        localidadFilter: localidades
+    };
 
-            for (const [selectId, values] of Object.entries(selects)) {
-                const select = document.getElementById(selectId);
-                values.forEach(v => {
-                    const opt = document.createElement('option');
-                    opt.value = opt.textContent = v;
-                    select.appendChild(opt);
-                });
-            }
+    for (const [selectId, values] of Object.entries(selects)) {
+        const select = document.getElementById(selectId);
+        
+        // 👇 LIMPIAR EL SELECT DEJANDO SOLO LA PRIMERA OPCIÓN
+        const firstOption = select.options[0]; // Guardar "Todas las..."
+        select.innerHTML = ''; // Limpiar todo
+        select.appendChild(firstOption); // Restaurar la primera opción
+        
+        // Ahora agregar las opciones únicas
+        values.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v;
+            opt.textContent = v;
+            select.appendChild(opt);
+        });
+    }
 
-            // Event listener para búsqueda en tiempo real
-            document.getElementById('searchInput').addEventListener('input', applyFilters);
+    // Event listener para búsqueda en tiempo real
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
 
-            // Event listener para búsqueda dentro del multiselect
-            document.getElementById('multiselectSearch').addEventListener('input', filterMultiselectOptions);
+    // Event listener para búsqueda dentro del multiselect
+    document.getElementById('multiselectSearch').addEventListener('input', filterMultiselectOptions);
 
-            // Cerrar dropdown al hacer clic fuera
-            document.addEventListener('click', (e) => {
-                const container = document.getElementById('familiaMultiselect');
-                if (!container.contains(e.target)) {
-                    closeMultiselect();
-                }
-            });
+    // Cerrar dropdown al hacer clic fuera
+    document.addEventListener('click', (e) => {
+        const container = document.getElementById('familiaMultiselect');
+        if (!container.contains(e.target)) {
+            closeMultiselect();
         }
+    });
+}
 
         function toggleMultiselect() {
             const dropdown = document.getElementById('multiselectDropdown');
@@ -1824,3 +1834,4 @@
     </script>
 </body>
 </html>
+
