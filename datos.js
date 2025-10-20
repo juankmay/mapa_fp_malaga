@@ -3263,7 +3263,7 @@ const CENTROS_DATA = [
     "Código": 29700412,
     "Centro": "I.E.S. Portada Alta",
     "LOCALIDAD": "Málaga",
-    "ENSEÑANZA": "F.P. Inicial Parcial Semiprese",
+    "ENSEÑANZA": "F.P. Inicial Parcial Semipresencial",
     "Ciclo Formativo": "Desarrollo de aplicaciones multiplataforma",
     "Familia Profesional": "Informática y Comunicaciones",
     "latitud": 36.7189614,
