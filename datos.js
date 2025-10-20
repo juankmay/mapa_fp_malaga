@@ -43,7 +43,7 @@ const CENTROS_DATA = [
     "Código": 29700114,
     "Centro": "I.E.S. Gerald Brenan",
     "LOCALIDAD": "Alhaurín de la Torre",
-    "ENSEÑANZA": "Grado Medio.",
+    "ENSEÑANZA": "Grado Medio",
     "Ciclo Formativo": "Sistemas microinformáticos y redes",
     "Familia Profesional": "Informática y Comunicaciones",
     "latitud": 36.6666162,
