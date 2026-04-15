@@ -118,8 +118,23 @@ function loadData() {
 
 function populateFilters() {
     const familias = [...new Set(allData.map(d => d['Familia Profesional']))].filter(Boolean).sort();
-    const ensenanzas = [...new Set(allData.map(d => d.ENSEÑANZA))].filter(Boolean).sort();
-    const localidades = [...new Set(allData.map(d => d.LOCALIDAD))].filter(Boolean).sort();
+const ORDEN_ENSENANZA = [
+    'Grado Básico',
+    'Grado Medio',
+    'Grado Superior',
+    'Curso Especialización Grado Medio',
+    'Curso Especialización Grado Superior'
+];
+
+const ensenanzas = [...new Set(allData.map(d => d.ENSEÑANZA))].filter(Boolean).sort((a, b) => {
+    const ia = ORDEN_ENSENANZA.findIndex(o => a.toLowerCase().includes(o.toLowerCase()));
+    const ib = ORDEN_ENSENANZA.findIndex(o => b.toLowerCase().includes(o.toLowerCase()));
+    const pa = ia === -1 ? 999 : ia;
+    const pb = ib === -1 ? 999 : ib;
+    if (pa !== pb) return pa - pb;
+    return a.localeCompare(b, 'es');
+});
+	const localidades = [...new Set(allData.map(d => d.LOCALIDAD))].filter(Boolean).sort();
 
     allFamilias = familias;
 
