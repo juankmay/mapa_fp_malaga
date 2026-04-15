@@ -733,7 +733,7 @@ const CENTROS_DATA = [
     "Código": 29020231,
     "Centro": "C.P.I.F.P. Alan Turing",
     "LOCALIDAD": "Campanillas",
-    "ENSEÑANZA": "Curso Especialización Grado Superior Oferta Parcial a Distancia,
+    "ENSEÑANZA": "Curso Especialización Grado Superior Oferta Parcial a Distancia",
     "Ciclo Formativo": "Ciberseguridad en Entornos de las Tecnologías de la Información",
     "Familia Profesional": "Informática y Comunicaciones",
     "latitud": 36.7405572,
