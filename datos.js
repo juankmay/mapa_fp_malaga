@@ -4846,8 +4846,8 @@ const CENTROS_DATA = [
     "ENSEÑANZA": "Grado Medio",
     "Ciclo Formativo": "Producción agroecológica",
     "Familia Profesional": "Agraria",
-    "latitud": 36.7124363,
-    "longitud": -4.4495514
+    "latitud": 36.770366,
+    "longitud": -4.1040808
   },
   {
     "Código": 29701295,
@@ -4856,7 +4856,7 @@ const CENTROS_DATA = [
     "ENSEÑANZA": "Grado Básico Específico",
     "Ciclo Formativo": "Agrojardineria y Composiciones Florales (Pefpb)",
     "Familia Profesional": "Agraria",
-    "latitud": 36.7124363,
-    "longitud": -4.4495514
+    "latitud": 36.770366,
+    "longitud": -4.1040808
   }
 ];
