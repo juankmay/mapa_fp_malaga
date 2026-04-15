@@ -4203,7 +4203,7 @@ const CENTROS_DATA = [
     "Código": 29700035,
     "Centro": "I.E.S. Profesor Gonzalo Huesa",
     "LOCALIDAD": "Ronda",
-    "ENSEÑANZA": "F.P.E.G.M.",
+    "ENSEÑANZA": "Grado Medio",
     "Ciclo Formativo": "Cuidados auxiliares de enfermería",
     "Familia Profesional": "Sanidad",
     "latitud": 36.7429014,
