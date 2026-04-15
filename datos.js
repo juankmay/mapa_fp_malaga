@@ -2743,7 +2743,7 @@ const CENTROS_DATA = [
     "Código": 29012106,
     "Centro": "I.E.S. Miguel Romero Esteo",
     "LOCALIDAD": "Málaga",
-    "ENSEÑANZA": "Oferta Parcial Grado Superior Adultos (Semi",
+    "ENSEÑANZA": "Oferta Parcial Grado Superior Adultos (Semipresencial)",
     "Ciclo Formativo": "Gestión de Ventas y Espacios Comerciales",
     "Familia Profesional": "Comercio y marketing",
     "latitud": 36.7079252,
