@@ -693,7 +693,7 @@ const CENTROS_DATA = [
     "Código": 29020231,
     "Centro": "C.P.I.F.P. Alan Turing",
     "LOCALIDAD": "Campanillas",
-    "ENSEÑANZA": "G.E.C.E.G.S.",
+    "ENSEÑANZA": "Curso Especialización Grado Superior",
     "Ciclo Formativo": "Ciberseguridad en Entornos de las Tecnologías de la Información",
     "Familia Profesional": "Informática y Comunicaciones",
     "latitud": 36.7405572,
